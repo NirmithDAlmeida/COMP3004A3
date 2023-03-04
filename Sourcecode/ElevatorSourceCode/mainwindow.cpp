@@ -14,7 +14,9 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
+
+void MainWindow::on_StartSimulation_clicked()
 {
-    ui->textBrowser->append("I AM CLICKED AND IT IS WORKING");
+    ui->OutputBox->append("this button is activated and simulation is started");
+    ui->StartSimulation->setVisible(false);
 }
