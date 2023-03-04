@@ -13,3 +13,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->textBrowser->append("I AM CLICKED AND IT IS WORKING");
+}
