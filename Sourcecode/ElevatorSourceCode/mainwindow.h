@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <iostream>
+
+#include "Control_Systems.h"
+#include "Elevator.h"
+#include "DisplayWindow.h"
+#include "Passenger.h"
+#include "ElevatorButton.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,7 +26,10 @@ private slots:
 
     void on_StartSimulation_clicked();
 
+    void on_fireSafety_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Control_Systems *c;
 };
 #endif // MAINWINDOW_H

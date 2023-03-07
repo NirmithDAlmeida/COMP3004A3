@@ -1,6 +1,7 @@
 #ifndef DISPLAYWINDOW_H
 #define DISPLAYWINDOW_H
 
+using namespace std;
 class display{
 public:
     display();

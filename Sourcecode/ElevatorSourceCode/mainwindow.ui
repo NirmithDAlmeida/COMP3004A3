@@ -44,7 +44,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Elevator System&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="fireSafety">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -153,26 +153,6 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string># of Car</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>90</y>
-      <width>141</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>120</y>
-      <width>141</width>
-      <height>21</height>
-     </rect>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_4">
@@ -448,10 +428,30 @@ p, li { white-space: pre-wrap; }
      <string>Close</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="numberFloor">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>80</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="numberCar">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>110</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>textBrowser_6</zorder>
    <zorder>StartSimulation</zorder>
    <zorder>textBrowser_2</zorder>
-   <zorder>pushButton</zorder>
+   <zorder>fireSafety</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>pushButton_4</zorder>
    <zorder>pushButton_5</zorder>
@@ -460,8 +460,6 @@ p, li { white-space: pre-wrap; }
    <zorder>textBrowser_3</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
-   <zorder>textEdit</zorder>
-   <zorder>textEdit_2</zorder>
    <zorder>textBrowser_4</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
@@ -481,6 +479,8 @@ p, li { white-space: pre-wrap; }
    <zorder>label_11</zorder>
    <zorder>pushButton_9</zorder>
    <zorder>pushButton_10</zorder>
+   <zorder>numberFloor</zorder>
+   <zorder>numberCar</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -503,8 +503,8 @@ p, li { white-space: pre-wrap; }
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>137</y>
+     <x>720</x>
+     <y>66</y>
     </hint>
     <hint type="destinationlabel">
      <x>742</x>

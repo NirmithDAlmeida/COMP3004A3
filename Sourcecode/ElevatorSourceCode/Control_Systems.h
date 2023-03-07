@@ -4,18 +4,27 @@
 #include <vector>
 #include <string>
 
-#include "Elevators.h"
+#include <QTextEdit>
+#include <QTextStream>
+#include <iostream>
+#include "Elevator.h"
 #include "DisplayWindow.h"
 #include "Passenger.h"
 #include "ElevatorButton.h"
+#include <sstream>
+
+#include <QRandomGenerator>
+#include <QTextEdit>
 
 class Control_Systems{
 private:
     int CountPass;
     int CountCars;
+    int CountFloors;
     bool fire;
     bool overload;
     bool power;
+    int safeFloor;
     bool elevatorStuck;
     std::vector<Elevator*> elevators;
     std::vector<passenger*> passengers;
@@ -23,12 +32,12 @@ private:
 
 public:
 // not sure on what input will come in here
-    Control_Systems();
+    Control_Systems(int=3,int=1);
     ~Control_Systems();
     void basicCase();
     void helpButton();
     void DoorObstacle();
-    void FireCase();
+    void FireCase(QTextEdit *);
     void overloadCase();
     void outage();
     bool getElevatorCalled();//might not be necessary
