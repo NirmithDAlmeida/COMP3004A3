@@ -39,7 +39,7 @@ public:
     void DoorObstacle();
     void FireCase(QTextEdit *);
     void overloadCase();
-    void outage();
+    void outage(QTextEdit *);
     bool getElevatorCalled();//might not be necessary
     bool setElevatorCalled();//might not be necessary unless it is to call a available elevator
     void printSafetyFeatures();//this will be the main display showing any safetyIssues - WILL BE CALLED WHEN SAFETY FEATURE IS TRIGGERED

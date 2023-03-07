@@ -28,6 +28,8 @@ private slots:
 
     void on_fireSafety_clicked();
 
+    void on_powerOutage_clicked();
+
 private:
     Ui::MainWindow *ui;
     Control_Systems *c;
