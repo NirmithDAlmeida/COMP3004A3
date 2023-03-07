@@ -36,3 +36,13 @@ void MainWindow::on_fireSafety_clicked()
     ui->OutputBox->append("/n =========== Fire Safety tested =========== \n");
     ui->fireSafety->setDisabled(true);
 }
+
+void MainWindow::on_powerOutage_clicked()
+{
+    //clear previous text history
+    ui->OutputBox->clear();
+    ui->OutputBox->append("Power button safety is activated \n");
+    c->outage(ui->OutputBox);
+    ui->OutputBox->append("/n =========== Power Safety tested =========== \n");
+    ui->fireSafety->setDisabled(true);
+}
