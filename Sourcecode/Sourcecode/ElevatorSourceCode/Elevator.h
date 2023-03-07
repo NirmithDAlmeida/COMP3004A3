@@ -1,6 +1,7 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 #include <vector>
+#include <string>
 #include "Door.h"
 #include "DisplayWindow.h"
 class Elevator{
@@ -26,10 +27,10 @@ public:
     Elevator(int=1,int=0,float=200);
     ~Elevator();
     //main functions
-    void move(int);
+    int move(int);
     //printer statements
-    void printElevatorFloor(int);
-    void printSafetyMessages(string);
+    //void printElevatorFloor(int);
+    //void printSafetyMessages(string);
     //getters and setters
     //general behaviour
     int getMaxWeightLimit();
@@ -38,10 +39,10 @@ public:
     bool getStopped();
     bool getStatus();
     bool getReachedDestination();
-    bool setMoving();
-    bool setStopped();
-    bool setReachedDestination();// when user reaches destination
-    bool setStatus();
+    void setMoving();
+    void setStopped();
+    void setReachedDestination();// when user reaches destination
+    void setStatus();
     //safety featrures
     bool getOverload();
     bool getFire();
@@ -49,12 +50,12 @@ public:
     bool getPower();//if there is power true no power = false
     bool getHelpButton();//if button is pressed or not
     bool getElevatorStuck();//if elevator is stuck in between
-    bool setOverload();
-    bool setFire();
-    bool setSensorInterrupt();
-    bool setPower();
-    bool setHelpButton();
-    bool setElevatorStuck();
+    void setOverload();
+    void setFire();
+    void setSensorInterrupt();
+    void setPower();
+    void setHelpButton();
+    void setElevatorStuck();
 };
 
 #endif // ELEVATOR_H

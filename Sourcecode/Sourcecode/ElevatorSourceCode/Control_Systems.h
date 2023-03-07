@@ -24,6 +24,7 @@ private:
     bool fire;
     bool overload;
     bool power;
+    int safeFloor;
     bool elevatorStuck;
     std::vector<Elevator*> elevators;
     std::vector<passenger*> passengers;
@@ -31,7 +32,7 @@ private:
 
 public:
 // not sure on what input will come in here
-    Control_Systems(int,int);
+    Control_Systems(int=3,int=1);
     ~Control_Systems();
     void basicCase();
     void helpButton();

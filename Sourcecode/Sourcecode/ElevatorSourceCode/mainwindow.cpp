@@ -6,10 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QString nFloor = ui->numberFloor->text();
-    QString nCar = ui->numberCar->text();
-    //we do it  for one system now
-    c = new Control_Systems(3,1);
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +21,10 @@ void MainWindow::on_StartSimulation_clicked()
     ui->StartSimulation->setVisible(false);
     ui->numberFloor->setReadOnly(true);
     ui->numberCar->setReadOnly(true);
+    QString nFloor = ui->numberFloor->text();
+    QString nCar = ui->numberCar->text();
+    //we do it  for one system now
+    c = new Control_Systems(nFloor.toInt(),nCar.toInt());
 }
 
 void MainWindow::on_fireSafety_clicked()
@@ -34,4 +34,5 @@ void MainWindow::on_fireSafety_clicked()
     ui->OutputBox->append("Fire button safety is activated \n");
     c->FireCase(ui->OutputBox);
     ui->OutputBox->append("/n =========== Fire Safety tested =========== \n");
+    ui->fireSafety->setDisabled(true);
 }
