@@ -29,16 +29,16 @@ private:
     std::vector<Elevator*> elevators;
     std::vector<passenger*> passengers;
     bool ElevatorCalled;//check if elevator is called or not
-
+    bool sensorObstacle;
 public:
 // not sure on what input will come in here
     Control_Systems(int=3,int=1);
     ~Control_Systems();
     void basicCase();
     void helpButton();
-    void DoorObstacle();
+    void DoorObstacle(QTextEdit *);
     void FireCase(QTextEdit *);
-    void overloadCase();
+    void overloadCase(QTextEdit *);
     void outage(QTextEdit *);
     bool getElevatorCalled();//might not be necessary
     bool setElevatorCalled();//might not be necessary unless it is to call a available elevator

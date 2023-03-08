@@ -17,6 +17,7 @@ public:
     bool setDoorOpen();
     bool setKeepDoorOpen();
     bool setCloseDoor();
+    void setDoor(bool);
 };
 
 #endif // DOOR_H

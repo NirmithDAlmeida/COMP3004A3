@@ -30,6 +30,10 @@ private slots:
 
     void on_powerOutage_clicked();
 
+    void on_overload_clicked();
+
+    void on_doorObstacle_clicked();
+
 private:
     Ui::MainWindow *ui;
     Control_Systems *c;

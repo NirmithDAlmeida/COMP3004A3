@@ -83,7 +83,7 @@ p, li { white-space: pre-wrap; }
      <string>Help</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="doorObstacle">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
      <string>Door Obstacle</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="overload">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -454,8 +454,8 @@ p, li { white-space: pre-wrap; }
    <zorder>fireSafety</zorder>
    <zorder>powerOutage</zorder>
    <zorder>pushButton_4</zorder>
-   <zorder>pushButton_5</zorder>
-   <zorder>pushButton_6</zorder>
+   <zorder>doorObstacle</zorder>
+   <zorder>overload</zorder>
    <zorder>OutputBox</zorder>
    <zorder>textBrowser_3</zorder>
    <zorder>label</zorder>

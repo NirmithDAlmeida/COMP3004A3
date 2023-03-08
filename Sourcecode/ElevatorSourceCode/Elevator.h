@@ -6,6 +6,7 @@
 #include "DisplayWindow.h"
 class Elevator{
 private:
+    Door *door = new Door();
     int floorNumber;
     int CountPass;
     float WeightLimit;// might change to MaxPassengers
@@ -28,6 +29,9 @@ public:
     ~Elevator();
     //main functions
     int move(int);
+    void setDoor(bool);
+    int getWeightLimit();
+    bool getDoorStatus();
     //printer statements
     //void printElevatorFloor(int);
     //void printSafetyMessages(string);

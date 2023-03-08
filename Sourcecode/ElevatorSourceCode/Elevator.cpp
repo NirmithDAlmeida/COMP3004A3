@@ -14,11 +14,24 @@ Elevator::Elevator(int floor,int nPassenger, float weightLimit){
     isStoppedatFloor=false;
     ReachedDestination=false;
     status=false;
+
 }
+
+Elevator::~Elevator(){}
 
 int Elevator::move(int floor){
     floorNumber=floor;
     return floorNumber;
+}
+void Elevator::setDoor(bool a){
+    door->setDoor(a);
+}
+
+bool Elevator::getDoorStatus(){
+    return door->getDoorOpen();
+}
+int Elevator::getWeightLimit(){
+    return WeightLimit;
 }
 
 //GETTERS AND SETTERS
