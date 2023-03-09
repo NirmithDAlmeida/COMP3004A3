@@ -1,16 +1,18 @@
 #ifndef PASSENGER_H
 #define PASSENGER_H
-
+#include <iostream>
+#include <string>
+#include <vector>
 #include "ElevatorButton.h"
-
+#include "Door.h"
 class passenger{
 private:
     int floor;
-    string Name;
-    vector<int> destFloor;
+    std::string Name;
+    std::vector<int> destFloor;
     float weight=0.0;
 public:
-    passenger(string,int,float);
+    passenger(std::string,int,float);
     ~passenger();
     bool getFloor();
     bool getWeight();

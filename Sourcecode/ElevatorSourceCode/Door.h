@@ -13,10 +13,10 @@ public:
     bool getDoorOpen();
     bool getKeepDoorOpen();
     bool getCloseDoor();
-    bool getDoorOpenTimer();//no setters hard coded into system
+    int getDoorOpenTimer();//no setters hard coded into system
     bool setDoorOpen();
-    bool setKeepDoorOpen();
-    bool setCloseDoor();
+    void setKeepDoorOpen();
+    void setCloseDoor();
     void setDoor(bool);
 };
 
