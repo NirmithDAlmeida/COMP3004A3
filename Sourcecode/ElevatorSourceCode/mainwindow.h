@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <iostream>
-
+#include <string>
 #include "Control_Systems.h"
 #include "Elevator.h"
 #include "DisplayWindow.h"
@@ -33,6 +33,9 @@ private slots:
     void on_overload_clicked();
 
     void on_doorObstacle_clicked();
+
+    void populatePassengers();
+    void populatePassengers_goingDown();
 
 private:
     Ui::MainWindow *ui;

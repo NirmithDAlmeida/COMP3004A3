@@ -19,6 +19,7 @@ SOURCES += \
     Control_Systems.cpp \
     Door.cpp \
     Elevator.cpp \
+    Passenger.cpp \
     main.cpp \
     mainwindow.cpp
 

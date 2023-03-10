@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->Up,SIGNAL(clicked()),this,SLOT(populatePassengers()));
+    connect(ui->Down,SIGNAL(clicked()),this,SLOT(populatePassengers_goingDown()));
 }
 
 MainWindow::~MainWindow()
@@ -13,7 +15,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+void MainWindow::populatePassengers(){
+    ui->DisplayWindow->append("WE PRESSED A BTN");
+}
+void MainWindow::populatePassengers_goingDown(){
+    ui->DisplayWindow->append("WE GOING DOWN IT IS RAINING TIMBERRRRr");
+}
 
 void MainWindow::on_StartSimulation_clicked()
 {
@@ -25,9 +32,14 @@ void MainWindow::on_StartSimulation_clicked()
     QString nCar = ui->numberCar->text();
     //we do it  for one system now
     c = new Control_Systems(nFloor.toInt(),nCar.toInt());
-    for(int i=0;i<nFloor.toInt();i++){
+    for(int i=1;i<=nFloor.toInt();i++){
         ui->comboBox_3->addItem(QString::number(i));
+        ui->comboBox_2->addItem(QString::number(i));
     }
+    //not necessary since the ELEVATOR SHOULD KNOW WHERE IT IS AT ALL TIMES
+    /*for(int i=1;i<=nCar.toInt();i++){
+        ui->comboBox->addItem(QString::number(i));
+    }*/
 }
 
 void MainWindow::on_fireSafety_clicked()
