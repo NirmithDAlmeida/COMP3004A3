@@ -24,9 +24,10 @@ Control_Systems::~Control_Systems(){
 
 //safety features
 //fire
-void Control_Systems::FireCase(QTextEdit *t){
+void Control_Systems::FireCase(QTextEdit *t,QLineEdit *y){
     //set fire to true
     fire = true;
+    y->setText(QString::number(200)+" kg");
     //populate passengers and each passengers in elevator will need to depart
     //iterate over all elevator
     //set each elevator to a random floor within the constraint with random amount of passengers
@@ -45,6 +46,10 @@ void Control_Systems::FireCase(QTextEdit *t){
         t->append("Cars#" +QString::number(i+1)+"is now at safe floor# "+QString::number(safeFloor)+"\n");
         t->append("\nDOOR OPENING\n");
         elevators[i]->setDoor(true);
+        //check if passengers are there
+            //if yes iterate over each passenger and kick each one out
+            //if not break out of loop
+        //populate passengers and each passengers in elevator will need to depart
         t->append("\nDOOR CLOSING\n");
         elevators[i]->setDoor(false);
         //reset to default settings
@@ -56,8 +61,9 @@ void Control_Systems::FireCase(QTextEdit *t){
 //door obstacle
 //overload
 //power outage
-void Control_Systems::outage(QTextEdit *t){
+void Control_Systems::outage(QTextEdit *t,QLineEdit *y){
     power=true;
+    y->setText(QString::number(200)+" kg");
     //populate passengers and each passengers in elevator will need to depart
     t->append("HOUSE/BLDG POWER OUTAGE ALARM TRIGGERED\n");
     for(size_t i=0;i<elevators.size();i++){
@@ -71,6 +77,9 @@ void Control_Systems::outage(QTextEdit *t){
         t->append("Cars#" +QString::number(i+1)+"is now at safe floor# "+QString::number(safeFloor)+"\n");
         t->append("\nDOOR OPENING\n");
         elevators[i]->setDoor(true);
+        //check if passengers are there
+            //if yes iterate over each passenger and kick each one out
+            //if not break out of loop
         t->append("\nDOOR CLOSING\n");
         elevators[i]->setDoor(false);
         //reset to default settings
@@ -95,7 +104,6 @@ void Control_Systems::overloadCase(QTextEdit *y){
         //generate random number from passenger list and kick one person out
         y->append("\n Door closes\n");
         elevators[randomElevator]->setDoor(false);
-
     }
     overload=false;
 }

@@ -25,6 +25,9 @@ void MainWindow::on_StartSimulation_clicked()
     QString nCar = ui->numberCar->text();
     //we do it  for one system now
     c = new Control_Systems(nFloor.toInt(),nCar.toInt());
+    for(int i=0;i<nFloor.toInt();i++){
+        ui->comboBox_3->addItem(QString::number(i));
+    }
 }
 
 void MainWindow::on_fireSafety_clicked()
@@ -32,7 +35,7 @@ void MainWindow::on_fireSafety_clicked()
     //clear previous text history
     ui->OutputBox->clear();
     ui->OutputBox->append("Fire button safety is activated \n");
-    c->FireCase(ui->OutputBox);
+    c->FireCase(ui->OutputBox,ui->CurrentWeight);
     ui->OutputBox->append("/n =========== Fire Safety tested =========== \n");
     ui->fireSafety->setDisabled(true);
     ui->powerOutage->setDisabled(false);
@@ -48,7 +51,7 @@ void MainWindow::on_powerOutage_clicked()
     ui->doorObstacle->setDisabled(false);
     ui->OutputBox->clear();
     ui->OutputBox->append("Power button safety is activated \n");
-    c->outage(ui->OutputBox);
+    c->outage(ui->OutputBox,ui->CurrentWeight);
     ui->OutputBox->append("/n =========== Power Safety tested =========== \n");
     ui->powerOutage->setDisabled(true);
 }

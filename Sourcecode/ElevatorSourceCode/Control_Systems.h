@@ -5,6 +5,7 @@
 #include <string>
 
 #include <QTextEdit>
+#include <QLineEdit>
 #include <QTextStream>
 #include <iostream>
 #include "Elevator.h"
@@ -37,9 +38,9 @@ public:
     void basicCase();
     void helpButton();
     void DoorObstacle(QTextEdit *);
-    void FireCase(QTextEdit *);
+    void FireCase(QTextEdit *,QLineEdit *);
     void overloadCase(QTextEdit *);
-    void outage(QTextEdit *);
+    void outage(QTextEdit *,QLineEdit *);
     bool getElevatorCalled();//might not be necessary
     bool setElevatorCalled();//might not be necessary unless it is to call a available elevator
     void printSafetyFeatures();//this will be the main display showing any safetyIssues - WILL BE CALLED WHEN SAFETY FEATURE IS TRIGGERED

@@ -155,16 +155,6 @@ p, li { white-space: pre-wrap; }
      <string># of Car</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_4">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>170</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
@@ -189,23 +179,6 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="text">
      <string>Max Weight</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser_5">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>170</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;200 Kg&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox">
@@ -307,16 +280,6 @@ p, li { white-space: pre-wrap; }
      <string>Display Window</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser_7">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>350</y>
-      <width>161</width>
-      <height>81</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_7">
     <property name="geometry">
      <rect>
@@ -355,26 +318,6 @@ p, li { white-space: pre-wrap; }
     <property name="text">
      <string>Floor</string>
     </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox_3">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>400</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>1</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
    </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
@@ -448,6 +391,53 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
    </widget>
+   <widget class="QComboBox" name="comboBox_3">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>400</y>
+      <width>72</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="DisplayWindow_2">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>350</y>
+      <width>161</width>
+      <height>81</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="CurrentWeight">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>170</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0 Kg</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="numberFloor_3">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>170</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>200 Kg</string>
+    </property>
+   </widget>
+   <zorder>DisplayWindow_2</zorder>
    <zorder>textBrowser_6</zorder>
    <zorder>StartSimulation</zorder>
    <zorder>textBrowser_2</zorder>
@@ -460,27 +450,26 @@ p, li { white-space: pre-wrap; }
    <zorder>textBrowser_3</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
-   <zorder>textBrowser_4</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
-   <zorder>textBrowser_5</zorder>
    <zorder>comboBox</zorder>
    <zorder>label_5</zorder>
    <zorder>label_6</zorder>
    <zorder>comboBox_2</zorder>
    <zorder>DisplayWindow</zorder>
    <zorder>label_7</zorder>
-   <zorder>textBrowser_7</zorder>
    <zorder>pushButton_7</zorder>
    <zorder>pushButton_8</zorder>
    <zorder>label_8</zorder>
-   <zorder>comboBox_3</zorder>
    <zorder>label_9</zorder>
    <zorder>label_11</zorder>
    <zorder>pushButton_9</zorder>
    <zorder>pushButton_10</zorder>
    <zorder>numberFloor</zorder>
    <zorder>numberCar</zorder>
+   <zorder>comboBox_3</zorder>
+   <zorder>CurrentWeight</zorder>
+   <zorder>numberFloor_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
