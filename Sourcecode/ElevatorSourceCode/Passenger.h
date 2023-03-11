@@ -8,11 +8,11 @@
 class passenger{
 private:
     int floor;
-    std::string Name;
+    std::string name;
     std::vector<int> destFloor;
     float weight=0.0;
 public:
-    passenger(std::string,int,float);
+    passenger(std::string,int,float=50);
     ~passenger();
     bool getFloor();
     bool getWeight();

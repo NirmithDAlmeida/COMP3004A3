@@ -28,13 +28,20 @@ private:
     int safeFloor;
     bool elevatorStuck;
     std::vector<Elevator*> elevators;
-    std::vector<passenger*> passengers;
+    // for passengers going up
+    std::vector<passenger*> passengersUp;
+    // for passengers going down
+    std::vector<passenger*> passengersDown;
     bool ElevatorCalled;//check if elevator is called or not
     bool sensorObstacle;
+    int passengerCounter=0;
+
 public:
 // not sure on what input will come in here
     Control_Systems(int=3,int=1);
     ~Control_Systems();
+    void PopulatePassengers_up(int,QTextEdit *);
+    void PopulatePassengers_down(int,QTextEdit *);
     void basicCase();
     void helpButton();
     void DoorObstacle(QTextEdit *);

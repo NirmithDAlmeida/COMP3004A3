@@ -16,10 +16,16 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::populatePassengers(){
-    ui->DisplayWindow->append("WE PRESSED A BTN");
+    //WE NEED 2 POSSIBLE SELECTIONS
+    //IF UP button SAME SCENARIO for DOWN
+    //- dictionary type tp store and save data
+    //- sort it so all floors go in order
+    //get floor number
+    //ui->DisplayWindow->append("WE PRESSED A BTN Floor #"+ui->comboBox_3->currentText());
+    c->PopulatePassengers_up(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
 }
 void MainWindow::populatePassengers_goingDown(){
-    ui->DisplayWindow->append("WE GOING DOWN IT IS RAINING TIMBERRRRr");
+     c->PopulatePassengers_down(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
 }
 
 void MainWindow::on_StartSimulation_clicked()

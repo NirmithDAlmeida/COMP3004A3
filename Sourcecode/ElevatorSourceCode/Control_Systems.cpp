@@ -20,8 +20,24 @@ Control_Systems::~Control_Systems(){
     for(size_t i=0;i<elevators.size();i++){
         delete elevators[i];
     }
+    for(size_t i=0;i<passengersUp.size();i++){
+        delete passengersUp[i];
+    }
+}
+//int passengerCounter=0;
+void Control_Systems::PopulatePassengers_up(int floor,QTextEdit *t){
+    passengerCounter=passengerCounter+1;
+    passenger *p=new passenger(to_string(passengerCounter),floor,50);
+    passengersUp.push_back(p);
+    t->append(QString::number(passengerCounter)+" Passenger Added from floor# "+QString::number(floor)+" Going UP");
 }
 
+void Control_Systems::PopulatePassengers_down(int floor, QTextEdit *t){
+    passengerCounter=passengerCounter+1;
+    passenger *p=new passenger(to_string(passengerCounter),floor,50);
+    passengersDown.push_back(p);
+    t->append(QString::number(passengerCounter)+" Passenger Added from floor# "+QString::number(floor)+" Going DOWN");
+}
 //safety features
 //fire
 void Control_Systems::FireCase(QTextEdit *t,QLineEdit *y){
