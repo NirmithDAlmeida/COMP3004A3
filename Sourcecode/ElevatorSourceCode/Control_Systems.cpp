@@ -100,54 +100,62 @@ void Control_Systems::basicCase2(QTextEdit *t){
                 int whereElevator=elevators[j]->getFloorNumber();
                 t->append("Elevator is at Floor#"+QString::number(whereElevator));
                 //send elevator to floor of passenger to pick them up
-                if(!passengersUp2[i]->getStatus()){
+                if(!passengersUp2[i]->getStatus() && ((elevators[j]->getFloorNumber()<passengersUp2[i]->getFloor()) || (elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor()))){
                    elevators[j]->move(passengersUp2[i]->getFloor());
-                }
-                t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
-                //check if elevator is moving or it is stopped at a floor
-                if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
-                    //check if passenger is assigned
-                    t->append("}");
-                    if(!passengersUp2[i]->getStatus()){
-                        t->append("}");
-                        //check if it is same as passenger
-                        if((elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())||(elevators[j]->getFloorNumber()<passengersUp2[i]->getFloor())){
-                            passengersUp2[i]->setStatus(true);
-                            elevators[j]->move(passengersUp2[i]->getDestFloor());
-                            elevators[j]->AddToDestFloor(passengersUp2[i]->getDestFloor());
-                            std::vector<int> a = elevators[j]->getDestFloor();
-                            for(size_t k=0;k<a.size();k++){
-                                t->append("Destination Floors "+QString::number(a[k]));
-                            }
-                        }
-                    }
+                   t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
+                   //check if elevator is moving or it is stopped at a floor
+                   if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
+                       //check if passenger is assigned
+                       if(!passengersUp2[i]->getStatus()){
+                           passengersUp2[i]->setStatus(true);
+                           elevators[j]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                           std::vector<int> a = elevators[j]->getDestFloor();
+                           for(size_t k=0;k<a.size();k++){
+                               t->append("Destination Floors "+QString::number(a[k]));
+                           }
+                       }
+                       elevators[j]->move(passengersUp2[i]->getDestFloor());
+                   }
                 }
                 t->append("\n");
             }
+            int elevatorSendToBase = (rand() % elevators.size());
+            elevators[elevatorSendToBase]->move(1);
         }
+        //int elevatorSendToBase = (rand() % elevators.size());
+        //t->append(QString::number(elevatorSendToBase));
     }
     if(NPassengerDown>0){
-        for(size_t i=0;i<passengersUp2.size();i++){
+        for(size_t i=0;i<passengersDown2.size();i++){
             t->append("Passengers name "+QString::fromStdString(passengersUp2[i]->getName())+" is going up to floor Number "+QString::number(passengersUp2[i]->getDestFloor()));
             for(size_t j=0;j<elevators.size();j++){
+               //Elevator Name
                 t->append("Elevator #"+QString::number(j+1));
-                int whereElevator=elevators[i]->getFloorNumber();
+                //where it currently is
+                int whereElevator=elevators[j]->getFloorNumber();
                 t->append("Elevator is at Floor#"+QString::number(whereElevator));
-                elevators[j]->move(passengersUp2[i]->getFloor());
-                t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
-                if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
-                    if(!passengersUp2[i]->getStatus()){
-                        if((elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())||(elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())){
-                            passengersUp2[i]->setStatus(true);
-                            elevators[i]->AddToDestFloor(passengersUp2[i]->getDestFloor());
-                            std::vector<int> a = elevators[i]->getDestFloor();
-                            for(size_t k=0;k<a.size();k++){
-                                t->append("Destination Floors "+QString::number(a[k]));
-                            }
-                        }
-                    }
+                //send elevator to floor of passenger to pick them up
+                if(!passengersUp2[i]->getStatus() && ((elevators[j]->getFloorNumber()<passengersUp2[i]->getFloor()) || (elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor()))){
+                   elevators[j]->move(passengersUp2[i]->getFloor());
+                   t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
+                   //check if elevator is moving or it is stopped at a floor
+                   if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
+                       //check if passenger is assigned
+                       if(!passengersUp2[i]->getStatus()){
+                           passengersUp2[i]->setStatus(true);
+                           elevators[j]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                           std::vector<int> a = elevators[j]->getDestFloor();
+                           for(size_t k=0;k<a.size();k++){
+                               t->append("Destination Floors "+QString::number(a[k]));
+                           }
+                       }
+                       elevators[j]->move(passengersUp2[i]->getDestFloor());
+                   }
                 }
+                t->append("\n");
             }
+            int elevatorSendToBase = (rand() % elevators.size());
+            elevators[elevatorSendToBase]->move(1);
         }
     }
     /*for(size_t i=0;i<elevators.size();i++){
