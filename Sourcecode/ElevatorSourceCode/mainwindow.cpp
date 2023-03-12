@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(ui->Up,SIGNAL(clicked()),this,SLOT(populatePassengers()));
     connect(ui->Down,SIGNAL(clicked()),this,SLOT(populatePassengers_goingDown()));
+
     ui->MainUseCase->setDisabled(true);
+    ui->MainUseCase_2->setDisabled(true);
 }
 
 MainWindow::~MainWindow()
@@ -24,7 +26,11 @@ void MainWindow::on_MainUseCase_clicked()
     ui->doorObstacle->setDisabled(false);
     ui->OutputBox->clear();
     ui->OutputBox->append("\nMAIN USE CASE 1\n");
+    //disable destination since that is only for Use Case 2
+    ui->comboBox_4->setDisabled(true);
     c->basicCase(ui->OutputBox);
+    ui->MainUseCase_2->setDisabled(false);
+    ui->MainUseCase->setDisabled(true);
     //send elevator to floor
     //pick up passenger
     //go in particular direction
@@ -33,19 +39,49 @@ void MainWindow::on_MainUseCase_clicked()
 
 }
 
-void MainWindow::populatePassengers(){
-    //WE NEED 2 POSSIBLE SELECTIONS
-    //IF UP button SAME SCENARIO for DOWN
-    //- dictionary type tp store and save data
-    //- sort it so all floors go in order
-    //get floor number
-    //ui->DisplayWindow->append("WE PRESSED A BTN Floor #"+ui->comboBox_3->currentText());
-    c->PopulatePassengers_up(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
+void MainWindow::on_MainUseCase_2_clicked()
+{
+    //ui->DisplayWindow->clear();
+    ui->fireSafety->setDisabled(false);
+    ui->powerOutage->setDisabled(false);
+    ui->overload->setDisabled(false);
+    ui->doorObstacle->setDisabled(false);
+    ui->OutputBox->clear();
+    ui->comboBox_2->setEditable(false);
+    ui->ElevatorPanelElevatorNo->setEnabled(false);
+    //disable destination since that is only for Use Case 2
+    ui->comboBox_4->setDisabled(false);
+    ui->MainUseCase_2->setDisabled(true);
     ui->MainUseCase->setDisabled(false);
+    c->basicCase2(ui->OutputBox);
+}
+
+//WE NEED 2 POSSIBLE SELECTIONS
+//IF UP button SAME SCENARIO for DOWN
+//- dictionary type tp store and save data
+//- sort it so all floors go in order
+//get floor number
+//ui->DisplayWindow->append("WE PRESSED A BTN Floor #"+ui->comboBox_3->currentText());
+
+void MainWindow::populatePassengers(){
+    if(ui->comboBox_4->isEnabled()){
+        c->PopulatePassengers_up2(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow,ui->comboBox_4->currentText().toInt());
+    }
+    else{
+        c->PopulatePassengers_up(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
+    }
+    ui->MainUseCase->setDisabled(false);
+    ui->MainUseCase_2->setDisabled(false);
 }
 void MainWindow::populatePassengers_goingDown(){
-     c->PopulatePassengers_down(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
-     ui->MainUseCase->setDisabled(false);
+    if(ui->comboBox_4->isEnabled()){
+        c->PopulatePassengers_down2(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow,ui->comboBox_4->currentText().toInt());
+    }
+    else{
+        c->PopulatePassengers_down(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
+     }
+    ui->MainUseCase->setDisabled(false);
+    ui->MainUseCase_2->setDisabled(false);
 }
 
 void MainWindow::on_StartSimulation_clicked()
@@ -61,6 +97,7 @@ void MainWindow::on_StartSimulation_clicked()
     for(int i=1;i<=nFloor.toInt();i++){
         ui->comboBox_3->addItem(QString::number(i));
         ui->comboBox_2->addItem(QString::number(i));
+        ui->comboBox_4->addItem(QString::number(i));
     }
     //not necessary since the ELEVATOR SHOULD KNOW WHERE IT IS AT ALL TIMES
     /*for(int i=1;i<=nCar.toInt();i++){
@@ -124,4 +161,10 @@ void MainWindow::on_doorObstacle_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
 
+}
+
+void MainWindow::on_Down_2_clicked()
+{
+    ui->comboBox_4->setEnabled(false);
+    //int a=ui->comboBox_4->isEnabled();
 }

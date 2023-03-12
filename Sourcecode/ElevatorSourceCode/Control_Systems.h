@@ -31,22 +31,29 @@ private:
     std::vector<Elevator*> elevators;
     // for passengers going up
     std::vector<passenger*> passengersUp;
+    std::vector<passenger*> passengersUp2;
     // for passengers going down
     std::vector<passenger*> passengersDown;
+     std::vector<passenger*> passengersDown2;
     bool ElevatorCalled;//check if elevator is called or not
     bool sensorObstacle;
     int passengerCounter=0;
+    int passengerCounter2=0;
 
 public:
 // not sure on what input will come in here
     Control_Systems(int=3,int=1);
     ~Control_Systems();
     int getPassengerSize();
+    void PopulatePassengers_up2(int,QTextEdit *,int);
+    void PopulatePassengers_down2(int,QTextEdit *,int);
     void PopulatePassengers_up(int,QTextEdit *);
     void PopulatePassengers_down(int,QTextEdit *);
     //allocation strategy 1
     void basicCase(QTextEdit *);
+    void basicCase2(QTextEdit *);
     void helpButton();
+
     void DoorObstacle(QTextEdit *);
     void FireCase(QTextEdit *,QLineEdit *);
     void overloadCase(QTextEdit *);
@@ -55,6 +62,7 @@ public:
     bool setElevatorCalled();//might not be necessary unless it is to call a available elevator
     void printSafetyFeatures();//this will be the main display showing any safetyIssues - WILL BE CALLED WHEN SAFETY FEATURE IS TRIGGERED
     void printNormalUpdates();//WILL BE CALLED WHEN TEST CASE IS SUCCESSFUL
+    void assignElevator(QTextEdit *);
 
 protected:
     bool hasElevatorArrived();

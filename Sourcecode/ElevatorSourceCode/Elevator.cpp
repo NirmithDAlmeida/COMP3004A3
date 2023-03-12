@@ -19,6 +19,10 @@ Elevator::Elevator(int floor,int nPassenger, float weightLimit){
 
 Elevator::~Elevator(){}
 
+void Elevator::AddToDestFloor(int dest){
+    destFloor.push_back(dest);
+}
+
 int Elevator::move(int floor){
     floorNumber=floor;
     return floorNumber;
@@ -54,11 +58,7 @@ bool Elevator::getReachedDestination(){
     return ReachedDestination;
 }
 void Elevator::setMoving(){
-    if(isMoving){
-        isMoving=false;
-    }else{
-        isMoving=true;
-    }
+    isMoving=!isMoving;
 }
 void Elevator::setStopped(){
     if(isStoppedatFloor){
@@ -141,4 +141,15 @@ void Elevator::setElevatorStuck(){
     }else{
         elevatorStuck=true;
     }
+}
+
+float Elevator::getCurLimit(){
+    return currWeightLimit;
+}
+void Elevator::setCurLimit(float a){
+    currWeightLimit=currWeightLimit+a;
+}
+
+std::vector<int> Elevator::getDestFloor(){
+    return destFloor;
 }

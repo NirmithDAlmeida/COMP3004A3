@@ -23,32 +23,60 @@ Control_Systems::~Control_Systems(){
     for(size_t i=0;i<passengersUp.size();i++){
         delete passengersUp[i];
     }
+    for(size_t i=0;i<passengersDown.size();i++){
+        delete passengersDown[i];
+    }
+    for(size_t i=0;i<passengersUp2.size();i++){
+        delete passengersUp2[i];
+    }
+    for(size_t i=0;i<passengersDown2.size();i++){
+        delete passengersDown2[i];
+    }
 }
 //int passengerCounter=0;
 void Control_Systems::PopulatePassengers_up(int floor,QTextEdit *t){
     passengerCounter=passengerCounter+1;
-    passenger *p=new passenger(std::to_string(passengerCounter),floor,50);
+    std::string passengerName="Passenger#"+std::to_string(passengerCounter);
+    passenger *p=new passenger(passengerName,floor,50);
     passengersUp.push_back(p);
     t->append(QString::number(passengerCounter)+" Passenger Added from floor# "+QString::number(floor)+" Going UP");
 }
 
 void Control_Systems::PopulatePassengers_down(int floor, QTextEdit *t){
     passengerCounter=passengerCounter+1;
-    passenger *p=new passenger(std::to_string(passengerCounter),floor,50);
+    std::string passengerName="Passenger#"+std::to_string(passengerCounter);
+    passenger *p=new passenger(passengerName,floor,50);
     passengersDown.push_back(p);
     t->append(QString::number(passengerCounter)+" Passenger Added from floor# "+QString::number(floor)+" Going DOWN");
 }
 
 //allocation strategy 1
+
+/*void Control_Systems::assignElevator(QTextEdit *t){
+
+}*/
 void Control_Systems::basicCase(QTextEdit *t){
     //if no passenger in list print message cannot allocate due to no passenger - not necessary
     //access passenger classs
     //iterate over each elevator first
+    /*std::sort(passengersUp.begin(), passengersUp.end(), [](passenger& lhs,passenger& rhs) {
+          return lhs.getFloor() < rhs.getFloor();
+       });*/
+    /*for(size_t i=0;i<passengersUp.size();i++){
+        t->append("Passeger"+QString::fromStdString(passengersUp[i]->getName()));
+    }*/
     for(size_t i=0;i<elevators.size();i++){
         int whereElevator=elevators[i]->getFloorNumber();
+        //int NPassengerUp=passengersUp.size();
+        std::string name="";
         t->append("Elevator# "+QString::number(i+1)+" at Floor# "+QString::number(whereElevator));
-        if(passengersDown.size()==0){
+        if(passengersDown.size()==0 || passengersUp.size()==0){
 
+            for(size_t i=0;i<passengersUp.size();i++){
+                name=passengersUp[i]->getName();
+                t->append("Passenger Name"+QString::fromStdString(name)+"Enters Elevator and ");
+                //elevators[i]->destFloor.push_back(value)
+            }
         }
     }
         //set first default variable where if used for first time all elevators are at ground level i.e. floor - 1
@@ -58,6 +86,122 @@ void Control_Systems::basicCase(QTextEdit *t){
             //go to highest floor to go down and start from there
 }
 
+void Control_Systems::basicCase2(QTextEdit *t){
+    t->append("MAIN USE CASE 2 Allocation strat 2");
+    int NPassengerUp=passengersUp2.size();
+    int NPassengerDown=passengersDown2.size();
+    if(NPassengerUp>0){
+        for(size_t i=0;i<passengersUp2.size();i++){
+            t->append("Passengers name "+QString::fromStdString(passengersUp2[i]->getName())+" is going up to floor Number "+QString::number(passengersUp2[i]->getDestFloor()));
+            for(size_t j=0;j<elevators.size();j++){
+               //Elevator Name
+                t->append("Elevator #"+QString::number(j+1));
+                //where it currently is
+                int whereElevator=elevators[j]->getFloorNumber();
+                t->append("Elevator is at Floor#"+QString::number(whereElevator));
+                //send elevator to floor of passenger to pick them up
+                if(!passengersUp2[i]->getStatus()){
+                   elevators[j]->move(passengersUp2[i]->getFloor());
+                }
+                t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
+                //check if elevator is moving or it is stopped at a floor
+                if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
+                    //check if passenger is assigned
+                    t->append("}");
+                    if(!passengersUp2[i]->getStatus()){
+                        t->append("}");
+                        //check if it is same as passenger
+                        if((elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())||(elevators[j]->getFloorNumber()<passengersUp2[i]->getFloor())){
+                            passengersUp2[i]->setStatus(true);
+                            elevators[j]->move(passengersUp2[i]->getDestFloor());
+                            elevators[j]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                            std::vector<int> a = elevators[j]->getDestFloor();
+                            for(size_t k=0;k<a.size();k++){
+                                t->append("Destination Floors "+QString::number(a[k]));
+                            }
+                        }
+                    }
+                }
+                t->append("\n");
+            }
+        }
+    }
+    if(NPassengerDown>0){
+        for(size_t i=0;i<passengersUp2.size();i++){
+            t->append("Passengers name "+QString::fromStdString(passengersUp2[i]->getName())+" is going up to floor Number "+QString::number(passengersUp2[i]->getDestFloor()));
+            for(size_t j=0;j<elevators.size();j++){
+                t->append("Elevator #"+QString::number(j+1));
+                int whereElevator=elevators[i]->getFloorNumber();
+                t->append("Elevator is at Floor#"+QString::number(whereElevator));
+                elevators[j]->move(passengersUp2[i]->getFloor());
+                t->append("Elevator at Floor #"+QString::number(elevators[j]->getFloorNumber()));
+                if((!elevators[j]->getMoving() || elevators[j]->getStopped())){
+                    if(!passengersUp2[i]->getStatus()){
+                        if((elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())||(elevators[j]->getFloorNumber()==passengersUp2[i]->getFloor())){
+                            passengersUp2[i]->setStatus(true);
+                            elevators[i]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                            std::vector<int> a = elevators[i]->getDestFloor();
+                            for(size_t k=0;k<a.size();k++){
+                                t->append("Destination Floors "+QString::number(a[k]));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /*for(size_t i=0;i<elevators.size();i++){
+        int whereElevator=elevators[i]->getFloorNumber();
+        std::string name="";
+        t->append("Elevator# "+QString::number(i+1)+" at Floor# "+QString::number(whereElevator));
+        if(passengersDown2.size()==0 || passengersUp2.size()==0){
+            if(NPassengerUp>0){
+                for(size_t j=0;i<passengersUp2.size();j++){
+                    if(elevators[i]->getCurLimit()<elevators[i]->getWeightLimit()){
+                        name=passengersUp2[i]->getName();
+                        t->append("Passenger Name"+QString::fromStdString(name)+"Enters Elevator and ");
+                        //elevators[i]->destFloor.push_back(value)
+                        elevators[i]->move(passengersUp2[i]->getFloor());
+                        t->append("Elevator# "+QString::number(i+1)+" at Floor# "+QString::number(elevators[i]->getFloorNumber()));
+                        elevators[i]->setCurLimit(passengersUp2[i]->getWeight());
+                        elevators[i]->
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            if(NPassengerDown>0){}
+        }
+    }*/
+}
+
+//allocation strategy 2
+void Control_Systems::PopulatePassengers_up2(int floor,QTextEdit *t,int destn){
+    if(floor==destn){
+        t->append("PASSENGER IN SAME FLOORAS DESTN NO ELEVATOR ASSIGNED");
+    }
+    else{
+        passengerCounter2=passengerCounter2+1;
+        std::string passengerName="Passenger#"+std::to_string(passengerCounter2);
+        passenger *p=new passenger(passengerName,floor,destn,50);
+        passengersUp2.push_back(p);
+        t->append(QString::number(passengerCounter2)+" Passenger Added from floor# "+QString::number(floor)+" Going UP - 2");
+    }
+}
+
+void Control_Systems::PopulatePassengers_down2(int floor, QTextEdit *t,int destn){
+    if(floor==destn){
+        t->append("PASSENGER IN SAME FLOORAS DESTN NO ELEVATOR ASSIGNED");
+    }
+    else{
+        passengerCounter2=passengerCounter2+1;
+        std::string passengerName="Passenger#"+std::to_string(passengerCounter);
+        passenger *p=new passenger(passengerName,floor,destn,50);
+        passengersDown2.push_back(p);
+        t->append(QString::number(passengerCounter2)+" Passenger Added from floor# "+QString::number(floor)+" Going DOWN - 2");
+    }
+}
 
 //safety features
 //fire

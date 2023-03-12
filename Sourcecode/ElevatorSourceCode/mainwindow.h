@@ -41,6 +41,10 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_MainUseCase_2_clicked();
+
+    void on_Down_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Control_Systems *c;

@@ -10,6 +10,7 @@ private:
     Door *door = new Door();
     int floorNumber;
     int CountPass;
+    float currWeightLimit=0;
     float WeightLimit;// might change to MaxPassengers
     std::vector<int> destFloor;
     //safety feature
@@ -44,6 +45,8 @@ public:
     bool getStopped();
     bool getStatus();
     bool getReachedDestination();
+    std::vector<int> getDestFloor();
+    void AddToDestFloor(int);
     void setMoving();
     void setStopped();
     void setReachedDestination();// when user reaches destination
@@ -55,12 +58,14 @@ public:
     bool getPower();//if there is power true no power = false
     bool getHelpButton();//if button is pressed or not
     bool getElevatorStuck();//if elevator is stuck in between
+    float getCurLimit();
     void setOverload();
     void setFire();
     void setSensorInterrupt();
     void setPower();
     void setHelpButton();
     void setElevatorStuck();
+    void setCurLimit(float);
 };
 
 #endif // ELEVATOR_H
