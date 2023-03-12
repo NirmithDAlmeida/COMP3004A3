@@ -37,6 +37,10 @@ private slots:
     void populatePassengers();
     void populatePassengers_goingDown();
 
+    void on_MainUseCase_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     Control_Systems *c;

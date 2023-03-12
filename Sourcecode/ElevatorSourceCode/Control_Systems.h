@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include <QTextEdit>
 #include <QLineEdit>
@@ -40,9 +41,11 @@ public:
 // not sure on what input will come in here
     Control_Systems(int=3,int=1);
     ~Control_Systems();
+    int getPassengerSize();
     void PopulatePassengers_up(int,QTextEdit *);
     void PopulatePassengers_down(int,QTextEdit *);
-    void basicCase();
+    //allocation strategy 1
+    void basicCase(QTextEdit *);
     void helpButton();
     void DoorObstacle(QTextEdit *);
     void FireCase(QTextEdit *,QLineEdit *);

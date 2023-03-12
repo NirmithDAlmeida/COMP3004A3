@@ -8,11 +8,29 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     connect(ui->Up,SIGNAL(clicked()),this,SLOT(populatePassengers()));
     connect(ui->Down,SIGNAL(clicked()),this,SLOT(populatePassengers_goingDown()));
+    ui->MainUseCase->setDisabled(true);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_MainUseCase_clicked()
+{
+    ui->fireSafety->setDisabled(false);
+    ui->powerOutage->setDisabled(false);
+    ui->overload->setDisabled(false);
+    ui->doorObstacle->setDisabled(false);
+    ui->OutputBox->clear();
+    ui->OutputBox->append("\nMAIN USE CASE 1\n");
+    c->basicCase(ui->OutputBox);
+    //send elevator to floor
+    //pick up passenger
+    //go in particular direction
+    //initial all elevator is at floor 0
+    //first scenario assign one elevator till weight limit reached and head to other floors
+
 }
 
 void MainWindow::populatePassengers(){
@@ -23,9 +41,11 @@ void MainWindow::populatePassengers(){
     //get floor number
     //ui->DisplayWindow->append("WE PRESSED A BTN Floor #"+ui->comboBox_3->currentText());
     c->PopulatePassengers_up(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
+    ui->MainUseCase->setDisabled(false);
 }
 void MainWindow::populatePassengers_goingDown(){
      c->PopulatePassengers_down(ui->comboBox_3->currentText().toInt(),ui->DisplayWindow);
+     ui->MainUseCase->setDisabled(false);
 }
 
 void MainWindow::on_StartSimulation_clicked()
@@ -46,6 +66,7 @@ void MainWindow::on_StartSimulation_clicked()
     /*for(int i=1;i<=nCar.toInt();i++){
         ui->comboBox->addItem(QString::number(i));
     }*/
+    //if
 }
 
 void MainWindow::on_fireSafety_clicked()
@@ -98,4 +119,9 @@ void MainWindow::on_doorObstacle_clicked()
     c->DoorObstacle(ui->OutputBox);
     ui->OutputBox->append("/n =========== Door Sensor Safety tested =========== \n");
     ui->doorObstacle->setDisabled(true);
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
 }

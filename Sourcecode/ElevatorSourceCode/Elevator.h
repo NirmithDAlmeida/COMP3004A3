@@ -1,6 +1,7 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 #include <vector>
+#include<iostream>
 #include <string>
 #include "Door.h"
 #include "DisplayWindow.h"
@@ -10,7 +11,7 @@ private:
     int floorNumber;
     int CountPass;
     float WeightLimit;// might change to MaxPassengers
-    vector<int> destFloor;
+    std::vector<int> destFloor;
     //safety feature
     bool overload;
     bool fire;

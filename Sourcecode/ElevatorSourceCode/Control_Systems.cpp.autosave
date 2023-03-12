@@ -47,6 +47,9 @@ void Control_Systems::basicCase(QTextEdit *t){
     for(size_t i=0;i<elevators.size();i++){
         int whereElevator=elevators[i]->getFloorNumber();
         t->append("Elevator# "+QString::number(i+1)+" at Floor# "+QString::number(whereElevator));
+        if(passengersDown.size()==0){
+            
+        }
     }
         //set first default variable where if used for first time all elevators are at ground level i.e. floor - 1
         //if there are no down passengers send an elevator to corresponding floor to pick up passengers
