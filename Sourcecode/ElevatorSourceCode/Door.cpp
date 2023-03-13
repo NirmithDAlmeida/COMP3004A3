@@ -23,3 +23,6 @@ void Door::setKeepDoorOpen(){
 void Door::setCloseDoor(){
     closeDoor=!closeDoor;
 }
+void Door::setDoorOpenTimer(int a){
+    doorOpenTimer=a;
+}

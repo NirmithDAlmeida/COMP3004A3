@@ -39,6 +39,7 @@ private:
     bool sensorObstacle;
     int passengerCounter=0;
     int passengerCounter2=0;
+    Door *d=new Door();
 
 public:
 // not sure on what input will come in here
@@ -64,6 +65,8 @@ public:
     void printNormalUpdates();//WILL BE CALLED WHEN TEST CASE IS SUCCESSFUL
     void assignElevator(QTextEdit *);
 
+    //Elevator Door Interaction
+    void DoorScenario(QTextEdit *,bool);
 protected:
     bool hasElevatorArrived();
     bool ElevatorAvailable(Elevator*);

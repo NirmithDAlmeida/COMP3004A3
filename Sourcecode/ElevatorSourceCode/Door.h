@@ -18,6 +18,7 @@ public:
     void setKeepDoorOpen();
     void setCloseDoor();
     void setDoor(bool);
+    void setDoorOpenTimer(int);
 };
 
 #endif // DOOR_H

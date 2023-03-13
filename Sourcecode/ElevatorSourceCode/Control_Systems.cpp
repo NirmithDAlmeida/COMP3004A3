@@ -322,6 +322,38 @@ void Control_Systems::DoorObstacle(QTextEdit *y){
     }
     sensorObstacle=false;
 }
+
+void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){
+    int randomElevator=QRandomGenerator::global()->bounded(1,CountCars);
+    t->append("Elevator# "+QString::number(randomElevator));
+    if(passengersUp2.size()>0){
+        //populate 1 elevator with this
+        //t->append("Elevator# "+QString::number(randomElevator));
+        t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        elevators[randomElevator]->move(passengersUp2[0]->getFloor());
+        t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        t->append("Passenger Name "+QString::fromStdString(passengersUp2[0]->getName())+" enters elevator");
+        if(instruction){
+            t->append("DOOR OPEN IS PRESSED");
+            d->setDoor(true);
+            t->append("COUNTER");
+            d->setDoorOpenTimer(20);
+            for(int i=0;i<d->getDoorOpenTimer();i++){
+                t->append(QString::number(i));
+            }
+            t->append("DOOR IS CLOSING");
+            d->setDoor(false);
+        }
+        else{
+            t->append("DOOR CLOSE IS PRESSED");
+            d->setDoor(false);
+            t->append("DOOR IS CLOSING");
+            d->setDoorOpenTimer(10);
+        }
+    }
+
+}
+
 int Control_Systems::getPassengerSize(){
     return passengersUp.size()+passengersDown.size();
 }

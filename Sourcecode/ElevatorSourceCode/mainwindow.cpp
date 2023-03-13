@@ -170,5 +170,12 @@ void MainWindow::on_Open_clicked()
 {
     ui->Open->setDisabled(true);
     ui->Close->setDisabled(false);
-    c->Door("Open");
+    c->DoorScenario(ui->OutputBox,true);
+}
+
+void MainWindow::on_Close_clicked()
+{
+    ui->Open->setDisabled(false);
+    ui->Close->setDisabled(true);
+    c->DoorScenario(ui->OutputBox,false);
 }

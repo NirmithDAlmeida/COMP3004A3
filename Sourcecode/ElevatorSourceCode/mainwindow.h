@@ -45,6 +45,10 @@ private slots:
 
     void on_Down_2_clicked();
 
+    void on_Open_clicked();
+
+    void on_Close_clicked();
+
 private:
     Ui::MainWindow *ui;
     Control_Systems *c;
