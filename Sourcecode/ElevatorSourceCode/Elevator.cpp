@@ -19,6 +19,12 @@ Elevator::Elevator(int floor,int nPassenger, float weightLimit){
 
 Elevator::~Elevator(){}
 
+void Elevator::removeDestFloor(){
+    if(destFloor.size()>0){
+        destFloor.erase(destFloor.begin());
+    }
+}
+
 void Elevator::AddToDestFloor(int dest){
     destFloor.push_back(dest);
 }

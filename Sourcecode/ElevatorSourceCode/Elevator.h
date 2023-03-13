@@ -34,6 +34,7 @@ public:
     void setDoor(bool);
     int getWeightLimit();
     bool getDoorStatus();
+    void removeDestFloor();
     //printer statements
     //void printElevatorFloor(int);
     //void printSafetyMessages(string);
