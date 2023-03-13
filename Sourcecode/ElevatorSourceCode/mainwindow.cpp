@@ -47,8 +47,6 @@ void MainWindow::on_MainUseCase_2_clicked()
     ui->overload->setDisabled(false);
     ui->doorObstacle->setDisabled(false);
     ui->OutputBox->clear();
-    ui->comboBox_2->setEditable(false);
-    ui->ElevatorPanelElevatorNo->setEnabled(false);
     //disable destination since that is only for Use Case 2
     ui->comboBox_4->setDisabled(false);
     ui->MainUseCase_2->setDisabled(true);
@@ -96,7 +94,6 @@ void MainWindow::on_StartSimulation_clicked()
     c = new Control_Systems(nFloor.toInt(),nCar.toInt());
     for(int i=1;i<=nFloor.toInt();i++){
         ui->comboBox_3->addItem(QString::number(i));
-        ui->comboBox_2->addItem(QString::number(i));
         ui->comboBox_4->addItem(QString::number(i));
     }
     //not necessary since the ELEVATOR SHOULD KNOW WHERE IT IS AT ALL TIMES
@@ -167,4 +164,11 @@ void MainWindow::on_Down_2_clicked()
 {
     ui->comboBox_4->setEnabled(false);
     //int a=ui->comboBox_4->isEnabled();
+}
+
+void MainWindow::on_Open_clicked()
+{
+    ui->Open->setDisabled(true);
+    ui->Close->setDisabled(false);
+    c->Door("Open");
 }
