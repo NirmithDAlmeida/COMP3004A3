@@ -323,16 +323,21 @@ void Control_Systems::DoorObstacle(QTextEdit *y){
     sensorObstacle=false;
 }
 
+//OPEN DOOR CLOSE DOOR
 void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){
     int randomElevator=QRandomGenerator::global()->bounded(1,CountCars);
     t->append("Elevator# "+QString::number(randomElevator));
-    if(passengersUp2.size()>0){
-        //populate 1 elevator with this
-        //t->append("Elevator# "+QString::number(randomElevator));
+    if(passengersUp2.size()>0 || passengersUp.size()>0){
         t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
-        elevators[randomElevator]->move(passengersUp2[0]->getFloor());
-        t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
-        t->append("Passenger Name "+QString::fromStdString(passengersUp2[0]->getName())+" enters elevator");
+        if(passengersUp2.size()>0){
+            elevators[randomElevator]->move(passengersUp2[0]->getFloor());
+            t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+            t->append("Passenger Name "+QString::fromStdString(passengersUp2[0]->getName())+" enters elevator");
+        }else{
+            elevators[randomElevator]->move(passengersUp[0]->getFloor());
+            t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+            t->append("Passenger Name "+QString::fromStdString(passengersUp[0]->getName())+" enters elevator");
+        }
         if(instruction){
             t->append("DOOR OPEN IS PRESSED");
             d->setDoor(true);
@@ -351,7 +356,38 @@ void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){
             d->setDoorOpenTimer(10);
         }
     }
-
+    else if(passengersDown2.size()>0 || passengersDown.size()>0){
+        t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        if(passengersDown2.size()>0){
+            elevators[randomElevator]->move(passengersDown2[0]->getFloor());
+            t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+            t->append("Passenger Name "+QString::fromStdString(passengersDown2[0]->getName())+" enters elevator");
+        }else{
+            elevators[randomElevator]->move(passengersDown[0]->getFloor());
+            t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+            t->append("Passenger Name "+QString::fromStdString(passengersDown[0]->getName())+" enters elevator");
+        }
+        if(instruction){
+            t->append("DOOR OPEN IS PRESSED");
+            d->setDoor(true);
+            t->append("COUNTER");
+            d->setDoorOpenTimer(20);
+            for(int i=0;i<d->getDoorOpenTimer();i++){
+                t->append(QString::number(i));
+            }
+            t->append("DOOR IS CLOSING");
+            d->setDoor(false);
+        }
+        else{
+            t->append("DOOR CLOSE IS PRESSED");
+            d->setDoor(false);
+            t->append("DOOR IS CLOSING");
+            d->setDoorOpenTimer(10);
+        }
+    }
+    else{
+        t->append("NO PASSENGERS IS POPULATED PLEASE POPULATE PASSENGER DATA \nTHANK YOU!\n");
+    }
 }
 
 int Control_Systems::getPassengerSize(){

@@ -168,14 +168,16 @@ void MainWindow::on_Down_2_clicked()
 
 void MainWindow::on_Open_clicked()
 {
-    ui->Open->setDisabled(true);
-    ui->Close->setDisabled(false);
+    ui->OutputBox->clear();
+//    ui->Open->setDisabled(true);
+//    ui->Close->setDisabled(false);
     c->DoorScenario(ui->OutputBox,true);
 }
 
 void MainWindow::on_Close_clicked()
 {
-    ui->Open->setDisabled(false);
-    ui->Close->setDisabled(true);
+    ui->OutputBox->clear();
+//    ui->Open->setDisabled(false);
+//    ui->Close->setDisabled(true);
     c->DoorScenario(ui->OutputBox,false);
 }
