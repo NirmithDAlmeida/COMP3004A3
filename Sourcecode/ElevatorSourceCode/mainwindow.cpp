@@ -151,10 +151,6 @@ void MainWindow::on_doorObstacle_clicked()
     ui->doorObstacle->setDisabled(true);
 }
 
-void MainWindow::on_pushButton_4_clicked()
-{
-
-}
 
 void MainWindow::on_Down_2_clicked()
 {
@@ -172,4 +168,10 @@ void MainWindow::on_Close_clicked()
 {
     ui->OutputBox->clear();
     c->DoorScenario(ui->OutputBox,false);
+}
+
+void MainWindow::on_HelpButton_clicked()
+{
+    ui->OutputBox->clear();
+    c->helpButton(ui->OutputBox);
 }

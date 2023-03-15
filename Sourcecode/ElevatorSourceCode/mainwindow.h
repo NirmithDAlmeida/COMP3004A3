@@ -39,8 +39,6 @@ private slots:
 
     void on_MainUseCase_clicked();
 
-    void on_pushButton_4_clicked();
-
     void on_MainUseCase_2_clicked();
 
     void on_Down_2_clicked();
@@ -48,6 +46,8 @@ private slots:
     void on_Open_clicked();
 
     void on_Close_clicked();
+
+    void on_HelpButton_clicked();
 
 private:
     Ui::MainWindow *ui;

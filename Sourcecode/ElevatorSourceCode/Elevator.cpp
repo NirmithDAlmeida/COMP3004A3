@@ -67,11 +67,7 @@ void Elevator::setMoving(){
     isMoving=!isMoving;
 }
 void Elevator::setStopped(){
-    if(isStoppedatFloor){
-        isStoppedatFloor=false;
-    }else{
-        isStoppedatFloor=true;
-    }
+    isStoppedatFloor=!isStoppedatFloor;
 }
 // when user reaches destination
 void Elevator::setReachedDestination(){
@@ -134,12 +130,8 @@ void Elevator::setPower(){
         power=true;
     }
 }
-void Elevator::setHelpButton(){
-    if(helpbutton){
-        helpbutton=false;
-    }else{
-        helpbutton=true;
-    }
+void Elevator::setHelpButton(bool a){
+    helpbutton=a;
 }
 void Elevator::setElevatorStuck(){
     if(elevatorStuck){

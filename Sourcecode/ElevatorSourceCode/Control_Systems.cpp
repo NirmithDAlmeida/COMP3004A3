@@ -310,11 +310,6 @@ void Control_Systems::FireCase(QTextEdit *t,QLineEdit *y){
     //set fire to true
     fire = true;
     y->setText(QString::number(200)+" kg");
-    //populate passengers and each passengers in elevator will need to depart
-    //iterate over all elevator
-    //set each elevator to a random floor within the constraint with random amount of passengers
-    //send each elevator to safe floor which is 0
-    //display every thing onto the main screen
     t->append("HOUSE/BLDG FIRE ALARM TRIGGERED\n");
     for(size_t i=0;i<elevators.size();i++){
         //t->append("Cars# "+QString::number(i));
@@ -421,7 +416,7 @@ void Control_Systems::DoorObstacle(QTextEdit *y){
 
 //OPEN DOOR CLOSE DOOR
 void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){
-    int randomElevator=QRandomGenerator::global()->bounded(1,CountCars);
+    int randomElevator=QRandomGenerator::global()->bounded(1,CountCars)-1;
     t->append("Elevator# "+QString::number(randomElevator));
     if(passengersUp2.size()>0 || passengersUp.size()>0){
         t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
@@ -488,4 +483,73 @@ void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){
 
 int Control_Systems::getPassengerSize(){
     return passengersUp.size()+passengersDown.size();
+}
+
+void Control_Systems::callSafety(QTextEdit *t,int elevatorNumber, int passengerNumber,bool direction){
+    t->append("Building Safety Has Responded");
+    if(direction){
+      elevators[elevatorNumber]->setStopped();
+      t->append("ISSUE IS RESOLVED");
+      t->append("Elevator moving to destn of passenger");
+      elevators[elevatorNumber]->move(passengersUp2[passengerNumber]->getDestFloor());
+    }
+    //elevators[elevatorNumber]->move(pass)
+
+}
+
+void Control_Systems::helpButton(QTextEdit *t){
+    int randomElevator=QRandomGenerator::global()->bounded(1,CountCars+1)-1;
+    t->append("Elevator# "+QString::number(randomElevator));
+    if(passengersUp2.size()>0 || passengersUp.size()>0){
+        int randomPassenger=QRandomGenerator::global()->bounded(0,passengersUp2.size());
+        t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        elevators[randomElevator]->move(passengersUp2[0]->getFloor());
+        elevators[randomElevator]->setStopped();
+        t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        t->append("Passenger Name "+QString::fromStdString(passengersUp2[randomPassenger]->getName())+" enters elevator");
+        t->append("THE HELP BUTTON IS PRESSED FOR ELEVATOR#"+QString::number(randomElevator));
+        elevators[randomElevator]->setHelpButton(true);
+        t->append("\nService are contacted and if no one responds in 5 seconds 911 is called\n");
+        t->append("\nService are connected\n");
+        //counter to simulate seconds and then when it hits 4 of 5 WE say service connected random generated value will forward scenario to cops
+        int generateRandom=QRandomGenerator::global()->bounded(1,3);
+        if (generateRandom==1){
+            callSafety(t,randomElevator,randomPassenger,true);
+            //elevators[randomElevator]->setStopped();
+        }
+        else{
+            for(int i=1;i<=5;i++){
+                t->append(QString::number(i)+" seconds");
+                elevators[randomElevator]->move(safeFloor);
+                elevators[randomElevator]->setStopped();
+            }
+            t->append("911 has been dialed\n Please wait for help while we move you to the safe floor");
+        }
+
+    }
+    else if(passengersDown2.size()>0 || passengersDown.size()>0){
+        int randomPassenger=QRandomGenerator::global()->bounded(0,passengersDown2.size());
+        t->append("Elevator at Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        elevators[randomElevator]->move(passengersDown2[0]->getFloor());
+        elevators[randomElevator]->setStopped();
+        t->append("Elevator now moving to Floor#"+QString::number(elevators[randomElevator]->getFloorNumber()));
+        t->append("Passenger Name "+QString::fromStdString(passengersDown2[randomPassenger]->getName())+" enters elevator");
+        t->append("THE HELP BUTTON IS PRESSED FOR ELEVATOR#"+QString::number(randomElevator));
+        elevators[randomElevator]->setHelpButton(true);
+        t->append("\nService are contacted and if no one responds in 5 seconds 911 is called\n");
+        t->append("\nService are connected\n");
+        //counter to simulate seconds and then when it hits 4 of 5 WE say service connected random generated value will forward scenario to cops
+        int generateRandom=QRandomGenerator::global()->bounded(1,3);
+        if (generateRandom==1){
+            callSafety(t,randomElevator,randomPassenger,false);
+            //elevators[randomElevator]->setStopped();
+        }
+        else{
+            for(int i=1;i<=5;i++){
+                t->append("911 has been dialed\n Please wait for help while we move you to the safe floor");
+                elevators[randomElevator]->move(safeFloor);
+                elevators[randomElevator]->setStopped();
+            }
+        }
+    }
 }

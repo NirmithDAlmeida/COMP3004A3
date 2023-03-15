@@ -64,7 +64,7 @@ public:
     void setFire();
     void setSensorInterrupt();
     void setPower();
-    void setHelpButton();
+    void setHelpButton(bool);
     void setElevatorStuck();
     void setCurLimit(float);
 };

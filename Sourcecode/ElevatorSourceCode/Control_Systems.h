@@ -55,7 +55,7 @@ public:
     int findClosest(int,bool);
     void basicCase(QTextEdit *);
     void basicCase2(QTextEdit *);
-    void helpButton();
+    void helpButton(QTextEdit *);
 
     void DoorObstacle(QTextEdit *);
     void FireCase(QTextEdit *,QLineEdit *);
@@ -69,6 +69,7 @@ public:
 
     //Elevator Door Interaction
     void DoorScenario(QTextEdit *,bool);
+    void callSafety(QTextEdit *,int ,int, bool);
 protected:
     bool hasElevatorArrived();
     bool ElevatorAvailable(Elevator*);
