@@ -136,6 +136,7 @@ void Control_Systems::basicCase(QTextEdit *t){
                 elevators[ElevatorNumber]->move(passengersUp2[i]->getDestFloor());
                 //if(whereElevator==passengersUp2[i]->getDestFloor()){
                 elevators[ElevatorNumber]->removeDestFloor();
+                passengersUp2[i]->setStatus(false);
                 t->append("\n");
             }
         }
@@ -164,9 +165,10 @@ void Control_Systems::basicCase(QTextEdit *t){
                     }
                 }
                 t->append("Elevator is now moving to Floor#"+QString::number(passengersDown2[i]->getDestFloor()));
-                elevators[ElevatorNumber]->move(passengersUp2[i]->getDestFloor());
+                elevators[ElevatorNumber]->move(passengersDown2[i]->getDestFloor());
                 //if(whereElevator==passengersUp2[i]->getDestFloor()){
                 elevators[ElevatorNumber]->removeDestFloor();
+                passengersDown2[i]->setStatus(false);
                 t->append("\n");
             }
         }
@@ -211,9 +213,8 @@ void Control_Systems::basicCase2(QTextEdit *t){
                        }
                        t->append("Elevator is now moving to Floor#"+QString::number(passengersUp2[i]->getDestFloor()));
                        elevators[j]->move(passengersUp2[i]->getDestFloor());
-                       //if(whereElevator==passengersUp2[i]->getDestFloor()){
-                           elevators[j]->removeDestFloor();
-                       //}
+                       elevators[j]->removeDestFloor();
+                       passengersUp2[i]->setStatus(false);
                    }
                 }
                 t->append("\n");
@@ -256,6 +257,7 @@ void Control_Systems::basicCase2(QTextEdit *t){
                        t->append("Elevator is now moving to Floor#"+QString::number(passengersDown2[i]->getDestFloor()));
                        elevators[j]->move(passengersDown2[i]->getDestFloor());
                        elevators[j]->removeDestFloor();
+                       passengersDown2[i]->setStatus(false);
                    }
                 }
                 t->append("\n");
