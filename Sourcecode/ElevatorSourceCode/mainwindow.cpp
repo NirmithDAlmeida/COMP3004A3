@@ -60,6 +60,7 @@ void MainWindow::on_MainUseCase_2_clicked()
 //- sort it so all floors go in order
 //get floor number
 //ui->DisplayWindow->append("WE PRESSED A BTN Floor #"+ui->comboBox_3->currentText());
+//reuse passenger data collected here
 
 void MainWindow::populatePassengers(){
     if(ui->comboBox_4->isEnabled()){
@@ -96,11 +97,6 @@ void MainWindow::on_StartSimulation_clicked()
         ui->comboBox_3->addItem(QString::number(i));
         ui->comboBox_4->addItem(QString::number(i));
     }
-    //not necessary since the ELEVATOR SHOULD KNOW WHERE IT IS AT ALL TIMES
-    /*for(int i=1;i<=nCar.toInt();i++){
-        ui->comboBox->addItem(QString::number(i));
-    }*/
-    //if
 }
 
 void MainWindow::on_fireSafety_clicked()
@@ -169,15 +165,11 @@ void MainWindow::on_Down_2_clicked()
 void MainWindow::on_Open_clicked()
 {
     ui->OutputBox->clear();
-//    ui->Open->setDisabled(true);
-//    ui->Close->setDisabled(false);
     c->DoorScenario(ui->OutputBox,true);
 }
 
 void MainWindow::on_Close_clicked()
 {
     ui->OutputBox->clear();
-//    ui->Open->setDisabled(false);
-//    ui->Close->setDisabled(true);
     c->DoorScenario(ui->OutputBox,false);
 }

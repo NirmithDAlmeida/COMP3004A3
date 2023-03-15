@@ -50,47 +50,82 @@ void Control_Systems::PopulatePassengers_down(int floor, QTextEdit *t){
     t->append(QString::number(passengerCounter)+" Passenger Added from floor# "+QString::number(floor)+" Going DOWN");
 }
 
+//Find closest distance to passenger floor from elevator
+int Control_Systems::findClosest(int passengerNumber,bool direction){
+    int closestElevator=0;
+    if(direction){
+        //passengerNumber is floor Number of passenger
+        if(elevators.size()>1){
+            //int closest=elevators[0]->getFloorNumber();
+            int closestDiff=std::abs(elevators[0]->getFloorNumber()-passengerNumber);
+            if(closestDiff==0){
+                return closestElevator;
+            }
+            for(size_t i=1;i<elevators.size();i++){
+                int CurrentDiff = std::abs(elevators[i]->getFloorNumber()-passengerNumber);
+                if(CurrentDiff<closestDiff){
+                    closestElevator=i;
+                    closestDiff=CurrentDiff;
+                }
+            }
+            return closestElevator;
+        }else{
+            closestElevator=0;
+            return closestElevator;
+        }
+    }
+    //std::vector<passenger> p=
+    return closestElevator;
+}
 
-//ONLY ACTIVE IF ATLEAST 1 Passenger present
-//When clicked HOLD THE ELEVATOR IN PLACE - print statement and show counter
-//pick a random elevator and assign a passenger to it - remove destFloor after executing test case
-//Either force push a passenger to the elevator or assign one from the passenger vector
-//if CLOSE is pressed print - door closed before default time
-//door open
-//door close scenario
 
 //allocation strategy 1
+//the elevator knows where it is at all times because it knows where it isn't strategy
 void Control_Systems::basicCase(QTextEdit *t){
-    //iterate over each passenger first
-    //assign them to an elevator
-    //generate random number for their input of floor
+//using elevator centered strat
+    //iterate over the passenger
+    //first passenger we do not have any special case scenario -> EVEN FIRST PASSENGER Goes for this
+    //other passenger onwards we find closest elevator to the passenger and they pick the person up
+    t->append("MAIN USE CASE 2 Allocation strat 2\n");
+    int NPassengerUp=passengersUp2.size();
+    int NPassengerDown=passengersDown2.size();
+    if(NPassengerUp>0){
+        for(size_t i=0;i<passengersUp2.size();i++){
+            t->append("Passengers name "+QString::fromStdString(passengersUp2[i]->getName())+" at floor# "+QString::number(passengersUp2[i]->getFloor())+" is going up to floor Number "+QString::number(passengersUp2[i]->getDestFloor()));
+            int ElevatorNumber=findClosest(passengersUp2[i]->getFloor(),true);
+            t->append("Elevator #"+QString::number(ElevatorNumber+1));
+            int whereElevator=elevators[ElevatorNumber]->getFloorNumber();
+            t->append("Elevator is currently at Floor#"+QString::number(whereElevator));
+            //assign elevator to that floor and push destn to it and move elevator there
+            //if(passengersUp2[i]->getFloor()<passengersUp2[i]->getFloor()){
+            t->append("Elevator is now moving to Floor#"+QString::number(passengersUp2[i]->getFloor()));
+            elevators[ElevatorNumber]->move(passengersUp2[i]->getFloor());
+            t->append("Elevator is now at Floor #"+QString::number(elevators[ElevatorNumber]->getFloorNumber()));
+            if((!elevators[ElevatorNumber]->getMoving() || elevators[ElevatorNumber]->getStopped())){
+                if(!passengersUp2[i]->getStatus()){
+                    passengersUp2[i]->setStatus(true);
+                    t->append("Door Opening");
+                    t->append("Audio System playing: Elevator has arrived");
+                    elevators[ElevatorNumber]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                    std::vector<int> a = elevators[ElevatorNumber]->getDestFloor();
+                    t->append("Door Closing");
+                    for(size_t k=0;k<a.size();k++){
+                        t->append("Destination Floors "+QString::number(a[k]));
+                    }
+                }
+                t->append("Elevator is now moving to Floor#"+QString::number(passengersUp2[i]->getDestFloor()));
+                elevators[ElevatorNumber]->move(passengersUp2[i]->getDestFloor());
+                //if(whereElevator==passengersUp2[i]->getDestFloor()){
+                elevators[ElevatorNumber]->removeDestFloor();
+                t->append("\n");
+            }
+        }
+    }
 
-
-    //access passenger classs
-    //iterate over each elevator first
-//    for(size_t i=0;i<elevators.size();i++){
-//        int whereElevator=elevators[i]->getFloorNumber();
-//        //int NPassengerUp=passengersUp.size();
-//        std::string name="";
-//        t->append("Elevator# "+QString::number(i+1)+" at Floor# "+QString::number(whereElevator));
-//        if(passengersDown.size()==0 || passengersUp.size()==0){
-
-//            for(size_t i=0;i<passengersUp.size();i++){
-//                name=passengersUp[i]->getName();
-//                t->append("Passenger Name"+QString::fromStdString(name)+"Enters Elevator and ");
-//                //elevators[i]->destFloor.push_back(value)
-//            }
-//        }
-//    }
-//        //set first default variable where if used for first time all elevators are at ground level i.e. floor - 1
-//        //if there are no down passengers send an elevator to corresponding floor to pick up passengers
-//            //go to their destination
-//        //else if there are no up passengers and only passengers going down
-//            //go to highest floor to go down and start from there
 }
 
 void Control_Systems::basicCase2(QTextEdit *t){
-    t->append("MAIN USE CASE 2 Allocation strat 2");
+    t->append("MAIN USE CASE 2 Allocation strat 2\n");
     int NPassengerUp=passengersUp2.size();
     int NPassengerDown=passengersDown2.size();
     if(NPassengerUp>0){
@@ -322,6 +357,14 @@ void Control_Systems::DoorObstacle(QTextEdit *y){
     }
     sensorObstacle=false;
 }
+
+//ONLY ACTIVE IF ATLEAST 1 Passenger present
+//When clicked HOLD THE ELEVATOR IN PLACE - print statement and show counter
+//pick a random elevator and assign a passenger to it - remove destFloor after executing test case
+//Either force push a passenger to the elevator or assign one from the passenger vector
+//if CLOSE is pressed print - door closed before default time
+//door open
+//door close scenario
 
 //OPEN DOOR CLOSE DOOR
 void Control_Systems::DoorScenario(QTextEdit *t, bool instruction){

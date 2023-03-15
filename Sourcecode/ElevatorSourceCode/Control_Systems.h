@@ -51,6 +51,8 @@ public:
     void PopulatePassengers_up(int,QTextEdit *);
     void PopulatePassengers_down(int,QTextEdit *);
     //allocation strategy 1
+
+    int findClosest(int,bool);
     void basicCase(QTextEdit *);
     void basicCase2(QTextEdit *);
     void helpButton();
