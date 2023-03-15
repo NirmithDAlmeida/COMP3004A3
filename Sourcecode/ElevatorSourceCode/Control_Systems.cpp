@@ -73,6 +73,25 @@ int Control_Systems::findClosest(int passengerNumber,bool direction){
             closestElevator=0;
             return closestElevator;
         }
+    }else{
+        if(elevators.size()>1){
+            //int closest=elevators[0]->getFloorNumber();
+            int closestDiff=std::abs(elevators[0]->getFloorNumber()-passengerNumber);
+            if(closestDiff==0){
+                return closestElevator;
+            }
+            for(size_t i=1;i<elevators.size();i++){
+                int CurrentDiff = std::abs(elevators[i]->getFloorNumber()-passengerNumber);
+                if(CurrentDiff<closestDiff){
+                    closestElevator=i;
+                    closestDiff=CurrentDiff;
+                }
+            }
+            return closestElevator;
+        }else{
+            closestElevator=0;
+            return closestElevator;
+        }
     }
     //std::vector<passenger> p=
     return closestElevator;
@@ -120,6 +139,40 @@ void Control_Systems::basicCase(QTextEdit *t){
                 t->append("\n");
             }
         }
+    }
+    if(NPassengerDown>0){
+        for(size_t i=0;i<passengersDown2.size();i++){
+            t->append("Passengers name "+QString::fromStdString(passengersDown2[i]->getName())+" at floor# "+QString::number(passengersDown2[i]->getFloor())+" is going up to floor Number "+QString::number(passengersDown2[i]->getDestFloor()));
+            int ElevatorNumber=findClosest(passengersDown2[i]->getFloor(),true);
+            t->append("Elevator #"+QString::number(ElevatorNumber+1));
+            int whereElevator=elevators[ElevatorNumber]->getFloorNumber();
+            t->append("Elevator is currently at Floor#"+QString::number(whereElevator));
+            //assign elevator to that floor and push destn to it and move elevator there
+            t->append("Elevator is now moving to Floor#"+QString::number(passengersDown2[i]->getFloor()));
+            elevators[ElevatorNumber]->move(passengersDown2[i]->getFloor());
+            t->append("Elevator is now at Floor #"+QString::number(elevators[ElevatorNumber]->getFloorNumber()));
+            if((!elevators[ElevatorNumber]->getMoving() || elevators[ElevatorNumber]->getStopped())){
+                if(!passengersDown2[i]->getStatus()){
+                    passengersDown2[i]->setStatus(true);
+                    t->append("Door Opening");
+                    t->append("Audio System playing: Elevator has arrived");
+                    elevators[ElevatorNumber]->AddToDestFloor(passengersDown2[i]->getDestFloor());
+                    std::vector<int> a = elevators[ElevatorNumber]->getDestFloor();
+                    t->append("Door Closing");
+                    for(size_t k=0;k<a.size();k++){
+                        t->append("Destination Floors "+QString::number(a[k]));
+                    }
+                }
+                t->append("Elevator is now moving to Floor#"+QString::number(passengersDown2[i]->getDestFloor()));
+                elevators[ElevatorNumber]->move(passengersUp2[i]->getDestFloor());
+                //if(whereElevator==passengersUp2[i]->getDestFloor()){
+                elevators[ElevatorNumber]->removeDestFloor();
+                t->append("\n");
+            }
+        }
+    }
+    else{
+        t->append("NO PASSENGERS TO ASSIGN");
     }
 
 }

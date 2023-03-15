@@ -27,7 +27,7 @@ void MainWindow::on_MainUseCase_clicked()
     ui->OutputBox->clear();
     ui->OutputBox->append("\nMAIN USE CASE 1\n");
     //disable destination since that is only for Use Case 2
-    ui->comboBox_4->setDisabled(true);
+    ui->comboBox_4->setDisabled(false);
     c->basicCase(ui->OutputBox);
     ui->MainUseCase_2->setDisabled(false);
     ui->MainUseCase->setDisabled(true);
