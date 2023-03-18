@@ -105,7 +105,7 @@ void Control_Systems::basicCase(QTextEdit *t){
     //iterate over the passenger
     //first passenger we do not have any special case scenario -> EVEN FIRST PASSENGER Goes for this
     //other passenger onwards we find closest elevator to the passenger and they pick the person up
-    t->append("MAIN USE CASE 2 Allocation strat 2\n");
+    t->append("MAIN USE CASE 1 Allocation strat 1\n");
     int NPassengerUp=passengersUp2.size();
     int NPassengerDown=passengersDown2.size();
     if(NPassengerUp>0){
@@ -126,6 +126,7 @@ void Control_Systems::basicCase(QTextEdit *t){
                     t->append("Door Opening");
                     t->append("Audio System playing: Elevator has arrived");
                     elevators[ElevatorNumber]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                    t->append("Passenger Name "+QString::fromStdString(passengersUp2[i]->getName())+" enters the elevator");
                     std::vector<int> a = elevators[ElevatorNumber]->getDestFloor();
                     t->append("Door Closing");
                     for(size_t k=0;k<a.size();k++){
@@ -158,6 +159,7 @@ void Control_Systems::basicCase(QTextEdit *t){
                     t->append("Door Opening");
                     t->append("Audio System playing: Elevator has arrived");
                     elevators[ElevatorNumber]->AddToDestFloor(passengersDown2[i]->getDestFloor());
+                    t->append("Passenger Name "+QString::fromStdString(passengersDown2[i]->getName())+" enters the elevator");
                     std::vector<int> a = elevators[ElevatorNumber]->getDestFloor();
                     t->append("Door Closing");
                     for(size_t k=0;k<a.size();k++){
@@ -205,6 +207,7 @@ void Control_Systems::basicCase2(QTextEdit *t){
                            t->append("Door Opening");
                            t->append("Audio System playing: Elevator has arrived");
                            elevators[j]->AddToDestFloor(passengersUp2[i]->getDestFloor());
+                           t->append("Passenger Name "+QString::fromStdString(passengersUp2[i]->getName())+" enters the elevator");
                            std::vector<int> a = elevators[j]->getDestFloor();
                            t->append("Door Closing");
                            for(size_t k=0;k<a.size();k++){
@@ -248,6 +251,7 @@ void Control_Systems::basicCase2(QTextEdit *t){
                            t->append("Door Opening");
                            t->append("Audio System playing: Elevator has arrived");
                            elevators[j]->AddToDestFloor(passengersDown2[i]->getDestFloor());
+                           t->append("Passenger Name "+QString::fromStdString(passengersDown2[i]->getName())+" enters the elevator");
                            std::vector<int> a = elevators[j]->getDestFloor();
                            t->append("Door Closing");
                            for(size_t k=0;k<a.size();k++){
@@ -328,6 +332,15 @@ void Control_Systems::FireCase(QTextEdit *t,QLineEdit *y){
         //check if passengers are there
             //if yes iterate over each passenger and kick each one out
             //if not break out of loop
+        if(elevators[i]->getDestFloor().size()>0){
+            t->append("ALL PASSENGERS ARE EXITING THE ELEVATOR");
+            for(size_t i=0;i<elevators[i]->getDestFloor().size();i++){
+                elevators[i]->removeDestFloor();
+            }
+        }
+        else{
+            t->append("ALL PASSENGERS ARE EXITING THE ELEVATOR");
+        }
         //populate passengers and each passengers in elevator will need to depart
         t->append("\nDOOR CLOSING\n");
         elevators[i]->setDoor(false);
@@ -359,6 +372,15 @@ void Control_Systems::outage(QTextEdit *t,QLineEdit *y){
         //check if passengers are there
             //if yes iterate over each passenger and kick each one out
             //if not break out of loop
+        if(elevators[i]->getDestFloor().size()>0){
+            t->append("ALL PASSENGERS ARE EXITING THE ELEVATOR");
+            for(size_t i=0;i<elevators[i]->getDestFloor().size();i++){
+                elevators[i]->removeDestFloor();
+            }
+        }
+        else{
+            t->append("ALL PASSENGERS ARE EXITING THE ELEVATOR");
+        }
         t->append("\nDOOR CLOSING\n");
         elevators[i]->setDoor(false);
         //reset to default settings
